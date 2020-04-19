@@ -14,6 +14,10 @@ passwd swoole    swoole123
 
 su - swoole
 
+
+聊天室 使用websocket 配置
+https://www.css3er.com/p/251.html
+
 sudo chmode -R 777 /root/swoole
 1、修改 tmp 目录所属用户为 root，用户组为 root
 chown -R swoole:swoole /root/swoole/Test

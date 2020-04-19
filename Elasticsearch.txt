@@ -1,0 +1,28 @@
+E:\elasticsearch\bin  ./bin/elasticsearch
+
+canal ElasticSearch
+kafka
+
+ElasticSearch，zookeeper
+
+Kibana
+
+head插件 Kibana
+
+一些使用Elasticsearch以及Logstash和Kibana的公司是：
+通过使用 GET / _index name/ indices，我们可以获得集群中存在的索引列表
+
+简单介绍一下ES的多种搜索方式
+1、query string search
+2、query DSL
+3、query filter
+4、full-text search
+
+文档看到这里
+https://es.xiaoleilu.com/010_Intro/30_Tutorial_Search.html
+
+看到索引管理  配置分析器
+
+
+
+九五至尊  创世纪  世纪之战

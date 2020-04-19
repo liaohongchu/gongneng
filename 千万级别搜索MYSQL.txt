@@ -1,0 +1,123 @@
+http://127.0.0.1:2009/public/index.php/index/index/list?page=90000
+
+select id,title from art where id>(select id from art limit 100,1 )   order by id desc limit 0,10 
+
+select id,title from collect where id>=(select id from collect order by id limit 90000,1) limit 10;
+
+select id,title from art where id>(select id from art limit 100,1 )   order by id desc limit 0,10 
+
+select a.id,a.title from art a inner join ( select id from art limit 1,10 ) as b on b.id=a.id limit 10
+
+1千万 1.72秒
+2千万 就3.6秒
+3千万 就 5.28秒
+
+select a.id,a.title,a.typeid from art a inner join (select id from art) b on a.id=b.id where title='张一鸣死磕社交，低速滑行的飞聊要飞到哪里去' ;
+select a.id,a.title,a.typeid from art a inner join (select id from art limit 1000000,10) b on a.id=b.id where title='任何年轻都是美丽的过去666' ;
+
+select a.id,a.title,a.typeid from art a  where title='内容平台发展中落下的债如何还' ;
+
+select a.id,a.title,a.typeid from art a where a.title='内容平台发展中落下的债如何还' ;
+
+select a.id,a.title,a.typeid from art a  where id>1000000 and a.typeid=194 and a.title='内容平台发展中落下的债如何.' ;
+
+select a.id,a.title,a.typeid from art a  where a.id>1000000 and a.title='内容平台发展中落下的债如何.' ;
+
+select a.id,a.title,a.typeid from art a inner   where a.id>1000000 and a.title='内容平台发展中落下的债如何.' ;
+
+select a.id,a.title,a.typeid,a.click from art a inner join (select id from art limit 5000000,30) as b on a.id=b.id where a.typeid=194 order by a.click;
+
+<select name="orderby" style="width:80px">
+            <option value="id">排序...</option>
+            <option value="pubdate">更新时间</option>
+            <option value="sortrank">置顶权值</option>
+            <option value="click">点击量</option>
+            <option value="scores">评论积分</option>
+            <option value="lastpost">最后评论</option>
+      	</select>
+
+
+
+
+select id,title from art where id>5000000 limit 0,10;
+
+./mysqldump –u root –p root  test > /root/www/test.sql
+
+
+mysql://root:root@192.168.187.10/test/art
+
+./Indexer.php --source=mysql://root:root@192.168.187.10/test/art --clean art
+
+./Quest.php art "鹬蚌相争"
+
+<?php
+//查询单个会员数据
+$customer_table = 'customer'.$id%5;
+$sql = 'select * from '.$customer_table.' where customer_id = '.$id;
+//查询全部会员数据
+$sql = '';
+$tbale = ['customer0','customer1','customer2','customer3','customer4'];
+foreach($table as $v){
+$sql .='select * from '.$v.' union';
+}
+$sql = substr($sql,0,-5);
+
+?>
+
+分库分表操作 生成UUID https://blog.csdn.net/nuli888/article/details/52143065
+
+实现Redis分布锁 https://www.cnblogs.com/wenxiong/p/3954174.html
+php实现redis锁机制 https://www.cnblogs.com/shiwenhu/p/5303008.html
+
+MYSQL锁 机制 锁说明 https://blog.csdn.net/lp2388163/article/details/80683383
+
+mysql优化的核心参数https://blog.csdn.net/qq_39570637/article/details/81414300
+mysql 性能优化方案 https://blog.csdn.net/jinxingfeng_cn/article/details/16878295
+ 可以列出mysql服务器运行各种状态值show global status;
+查询mysql服务器配置信息语句 show variables;
+ 慢查询 show variables like 'slow%';
+
+生成HTTPS证书
+https://www.cnblogs.com/liyulong1982/p/6106129.html
+https://www.cnblogs.com/dsc65749924/p/5857090.html
+
+MySQL占用内存较大与CPU过高测试与解决办法
+https://www.jb51.net/article/136096.htm
+
+为了保证生产系统数据可靠性和可用性，规避Redis+MySQL+Mongodb单点故障，分别作了主从备份，在此基础上采用了KEEPALIVE，通过VRRP协议实现了故障的自动切换。Redis配置了主从，MySQL配置了主从，Mongodb配置了切片；详细配置清单举例如下。
+
+mysql 优化sql语句的几种方法
+show [session|global]status like 'com_%';
+1、FORM: 对FROM左边的表和右边的表计算笛卡尔积，产生虚表VT1。
+2、ON: 对虚表VT1进行ON过滤，只有那些符合<join-condition>的行才会被记录在虚表VT2中。
+3、JOIN： 如果指定了OUTER JOIN（比如left join、 right join），那么保留表中未匹配的行就会作为外部行添加到虚拟表VT2中，产生虚拟表VT3。
+4、WHERE： 对虚拟表VT3进行WHERE条件过滤。只有符合<where-condition>的记录才会被插入到虚拟表VT4中。
+5、GROUP BY: 根据group by子句中的列，对VT4中的记录进行分组操作，产生VT5。
+6、HAVING： 对虚拟表VT5应用having过滤，只有符合<having-condition>的记录才会被 插入到虚拟表VT6中。
+7、SELECT： 执行select操作，选择指定的列，插入到虚拟表VT7中。
+8、DISTINCT： 对VT7中的记录进行去重。产生虚拟表VT8.
+9、ORDER BY: 将虚拟表VT8中的记录按照<order_by_list>进行排序操作，产生虚拟表VT9.
+10、LIMIT：取出指定行的记录，产生虚拟表VT10, 并将结果返回。
+
+
+MYSQL.cnf参数 熟记
+https://www.cnblogs.com/musings/p/5913157.html
+
+索引使用原则：
+
+　　　　　　      通过上面说的优点和缺点，我们应该可以知道，并不是每个字段度设置索引就好，也不是索引越多越好，而是需要自己合理的使用。
+
+　　　　　　　1、对经常更新的表就避免对其进行过多的索引，对经常用于查询的字段应该创建索引，
+
+　　　　　　　2、数据量小的表最好不要使用索引，因为由于数据较少，可能查询全部数据花费的时间比遍历索引的时间还要短，索引就可能不会产生优化效果。
+
+　　　　　　　3、在一同值少的列上(字段上)不要建立索引，比如在学生表的"性别"字段上只有男，女两个不同值。相反的，在一个字段上不同值较多可是建立索引
+
+4、如何联合查找？
+
+分库分表的结果会使数据分散，不好查询，主要有两种查询方式：
+
+（1）、分步查：先查找主表，然后得到关联表的id，再发起请求得到关联数据；
+
+（2）、联合查：同时发起多个查询请求，然后将所有的结果集合起来。
+

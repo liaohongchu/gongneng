@@ -1,0 +1,7 @@
+http://nonfu.me/p/8504.html
+
+支付宝集成——如何在回调地址中使用自定义参数
+http://www.solagirl.net/use-custom-para-in-alipay-return-url.html
+
+支付宝免费 接口 申请 
+http://bizpartner.alipay.com/shopex/index.htm

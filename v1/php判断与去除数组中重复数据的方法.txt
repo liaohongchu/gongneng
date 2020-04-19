@@ -1,0 +1,13 @@
+http://www.jbxue.com/article/9471.html
+
+function a_array_unique($array)//写的比较好
+{
+    $out = array();
+    foreach ($array as $key=>$value) {
+        if (!in_array($value, $out))
+        {
+            $out[$key] = $value;
+        }
+    }
+    return $out;
+}

@@ -1,0 +1,44 @@
+ps -ef|grep mysqld 看看是否有mysqld_safe 和mysqld进程
+
+如果已添加到系统服务中，可以service mysqld status
+
+
+du -h --max-depth=1  / 查看跟目录各个文件的大小
+
+./configure -help|grep gd
+
+查看进程 ps aux|grep php
+SecureCRT 
+./configure --prefix=/usr/local/nginx
+yum install pcre-devel
+
+1、检查freetype是否安装  yum 安装
+rpm -qa | grep freetype   which freetype
+
+都放在/var/cache/yum下了。如果没有的话就用命令find / -name xxx（xxx是包的名字）就可以找到了
+
+编译前关掉apache。并make clearn。   killall -9 nginx  killall -9 php-fpm
+杀掉所有的 pkill -9 php
+查看所有进程 ps -aux
+which       查看可执行文件的位置
+whereis    查看文件的位置
+locate       配 合数据库查看文件位置
+find          实际搜寻硬盘查询文件名称 
+查看是否安装了gcc
+
+   命令 #rpm -ql gcc
+
+        #rpm -qa |grep gcc
+
+   参数：q-询问
+
+         a-查询全部
+
+         l-显示列表
+
+#关闭php-fpm
+kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+
+#重启php-fpm
+kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
+

@@ -1,0 +1,18 @@
+
+http://blog.snsgou.com/post-800.html
+
+
+http://xiejiaming.com/143.html
+
+//   包含 memcached 类文件
+require_once(‘memcached-client.php’);
+
+http://www.cnblogs.com/zgx/archive/2011/08/10/2134097.html
+
+YII使用MEMCACHE http://www.2cto.com/kf/201304/201501.html
+
+telnet 204.44.101.181 11211
+
+配备Memcache服务器并实现主从复制功能
+http://www.educity.cn/wenda/153191.html
+

@@ -1,0 +1,106 @@
+http://www.cnblogs.com/b028/archive/2010/07/23/1867311.html
+
+./configure -prefix=/home/svn -without-berkeley-db -with-zlib
+
+http://www.tudou.com/programs/view/cryM5Hq_l1I/ 视频
+www.php200.com/html/linux_0724/92.html
+
+配置SVN 参考 http://server.zzidc.com/fwqjc/dajian/939.html
+同步到WEB代码处
+export LANG=zh_CN.UTF-8
+svn update -r m /home/website/web1/
+chown -R  /home/website/web1
+
+
+svnserve -d -r /home/svn
+
+mkdir -p /home/svn/repos1/
+
+anon-access = read
+auth-access = write
+password-db = /home/svn/repos1/conf/passwd
+authz-db = /home/svn/repos1/conf/authzwq!
+
+liao = 123456
+
+http://blog.sina.com.cn/s/blog_66ac09390101m112.html
+
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 3690 -j ACCEPT
+
+service iptables restart
+
+[groups]
+admin = repos1
+[repos1:/]
+@admin =rw
+
+svnserve -d -r /home/svn   killall svnserve
+
+kill -24556 PID
+
+no repository found in
+
+sudo svnserve -d -r /home/svn
+
+svnserve -d -r /home/svn/project
+
+anon-access = read
+auth-access = write
+password-db = /home/svn/project/conf/passwd
+authz-db = /home/svn/project/conf/authz
+
+killall svnserve
+
+svn://204.44.101.181/home/svn
+
+svn://204.44.101.181/project/
+
+svnserve.exe -d -r /home/svn/test
+
+svn co svn://204.44.101.181/project/
+
+svnserve -d -r /home/svn/project/
+
+# [repository:/baz/fuz]
+# @harry_and_sally = rw
+#  * = rw
+[project:/]
+liao=rw
+
+--------------------
+
+svn checkout svn://204.44.101.181/project  /home/website/web1
+Linux服务器实现SVN与WEB同步解决方案:
+
+http://www.linuxidc.com/Linux/2012-05/59857.htm
+1)设置WEB服务器根目录为/www/www.linuxidc.com
+
+2)checkout一份SVN
+
+svn co svn://localhost/www.linuxidc.com /www/www.linuxidc.com(目标)
+
+修改权限为WEB用户
+
+chown -R apache:apache /www/www.linuxidc.com/
+
+export LANG=zh_CN.UTF-8 #字符集，与服务器一致，可执行locale命令查看
+svn update /data/www/test/ #更新svn
+echo `date`,`whoami`,$REPOS,$REV >> /data/svn/test/hooks/svn_hook.log ＃记录时间日志
+chown -R web:web /data/www/test ＃将网站目录文件更改属主，如果你是使用root用户更新的话
+
+ 2.设置SVN更新时需要同步更新的目录
+
+svn update /alidata/www/examplePro --username yoursname --password yourpwd 
+
+7、设置权限
+vi authz
+在末尾添加如下代码：
+[/]
+dan=rw
+w=r
+意思是版本库的根目录dan对其有读写权限，w只有读权限。
+
+
+
+WINDOW svn
+Subversion http://www.cnblogs.com/liuzhong/archive/2011/07/10/2102634.html

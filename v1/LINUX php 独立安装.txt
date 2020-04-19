@@ -1,0 +1,241 @@
+./configure --prefix=/usr/local/php  --with-config-file-path=/usr/local/php/etc  --enable-fpm  --with-iconv=/usr/local/libiconv  --with-mcrypt \
+--enable-mbstring --disable-pdo --with-curl --disable-debug  --disable-rpath \
+--enable-inline-optimization --with-bz2  --with-zlib --enable-sockets \
+--enable-sysvsem --enable-sysvshm --enable-pcntl --enable-mbregex \
+--with-mhash --enable-zip --with-pcre-regex --with-mysql --with-mysqli \
+--with-gd --with-jpeg-dir
+
+http://www.xuebuyuan.com/2174288.html
+
+nginx对PHP文件报File not found.错
+fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+
+改成如下这句，即可
+
+fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+
+make && make install
+yum remove php*把所有的软件管理包卸载掉,重新编译php.
+为了让php-fpm已服务的形式启动。我们需要复制php安装目录下/sapi/fpm/init.d.php-fpm文件。如下：
+
+cp ./sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+
+Linux下nginx php-fpm安装配置笔记 
+http://www.woyaohuijia.cn/show/58.html
+
+解决方法：指定正确的apxs路径
+1.查找apxs路径
+# whereis apxs
+apxs:
+说明系统没有安装apxs扩展工具
+
+查看php进程的命令
+
+ps -ax | grep php
+
+杀掉进程
+pkill php   killall php-fpm
+
+php-5.5.28.tar.gz
+
+wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz
+
+./configure --prefix=/usr/local/libiconv
+
+./configure --prefix=/soft/php/php-5.4.x --enable-fpm --with-iconv=/soft/lib/libiconv-1.14
+
+检查php是否已经安装，使用php -v，是否能够看到版本号；或者使用rpm -qa | grep php查看是否安装过。
+
+启动php-fpm和nginx
+/usr/local/php/sbin/php-fpm 
+#手动打补丁的启动方式/usr/local/php/sbin/php-fpm start
+
+/usr/local/nginx/sbin/nginx -s reload
+
+编辑php-fpm.conf  killall php-fpm
+
+cd /usr/local/php/etc/
+cp php-fpm.conf.default php-fpm.conf
+vim php-fpm.conf
+
+找到pid = run/php-fpm.pid把前面的注释符号删掉。    ERROR: FPM initialization failed   No php.ini file will be used
+
+
+
+下面启动php-fpm并重启nginx
+
+/usr/local/php/sbin/php-fpm
+service nginx restart
+
+
+netstat -tunlp |grep 9000
+
+查看php-fpm进程数：
+ps aux | grep -c php-fpm
+
+查看运行内存
+/usr/bin/php  -i|grep mem
+
+重启php-fpm
+/etc/init.d/php-fpm restart
+
+service php-fpm start
+service php-fpm stop
+service php-fpm restart
+service php-fpm reload
+ 
+/etc/init.d/php-fpm start
+/etc/init.d/php-fpm stop
+/etc/init.d/php-fpm restart
+/etc/init.d/php-fpm reload
+
+ 查看了下/usr/local/php/var/run 目录，下面有对应的pid文件。但是报错显示没有这个pid文件，查看日志，还显示php-fpm正在运行。然后查看了一下配置文件是否有错误/usr/local/php/sbin/php-fpm  -t 查看一下语法没有错误，然后查看了一下/etc/init.d/php-fpm文件的内容，那些文件的路径什么的都是写的 @xxx@/php-fpm.pid这样的格式。然后将其改成绝对路径，killall php-fpm，再启动php-fpm，成功了。
+
+
+| the installation process at this point.                            |
++--------------------------------------------------------------------+
+
+Thank you for using PHP.
+
+config.status: creating php5.spec
+config.status: creating main/build-defs.h
+config.status: creating scripts/phpize
+config.status: creating scripts/man1/phpize.1
+config.status: creating scripts/php-config
+config.status: creating scripts/man1/php-config.1
+config.status: creating sapi/cli/php.1
+config.status: creating sapi/fpm/php-fpm.conf
+config.status: creating sapi/fpm/init.d.php-fpm
+config.status: creating sapi/fpm/php-fpm.service
+config.status: creating sapi/fpm/php-fpm.8
+config.status: creating sapi/fpm/status.html
+config.status: creating sapi/cgi/php-cgi.1
+config.status: creating ext/phar/phar.1
+config.status: creating ext/phar/phar.phar.1
+config.status: creating main/php_config.h
+config.status: main/php_config.h is unchanged
+config.status: executing default commands
+
+7.安装PHP和PHP-FPM
+我用的是yum默认安装PHP，如果是编译安装在./configure编译选项中要加上“--enable-fastcgi”来启用PHP对FastCGI的支持，“--enable-fpm”是激活对FastCGI模式的fpm支持。
+yum -y install  php*
+PHP全局配置文件是：/etc/php.ini
+PHP-FPM引擎的配置文件是：/etc/php-fpm.conf
+这里我们先看如何启动 php-fpm:
+1，查找php-fpm在sbin下的可执行启动文件的位置，我的默认是/usr/sbin/php-fpm
+[root@vb01 src]# locate php-fpm
+/etc/php-fpm.conf    #配置文件
+/usr/sbin/php-fpm    #启动文件
+
+
+http://blog.aboutc.net/linux/65/compile-and-install-php-on-linux
+
+
+ ./configure \
+--prefix=/usr/local/php \
+--with-config-file-path=/usr/local/php/etc \
+--enable-inline-optimization \
+--disable-debug \
+--disable-rpath \
+--enable-shared \
+--enable-opcache \
+--enable-fpm \
+--with-fpm-user=www \
+--with-fpm-group=www \
+--with-mysql=mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
+--with-gettext \
+--enable-mbstring \
+--with-iconv \
+--with-mcrypt \
+--with-mhash \
+--with-openssl \
+--enable-bcmath \
+--enable-soap \
+--with-libxml-dir \
+--enable-pcntl \
+--enable-shmop \
+--enable-sysvmsg \
+--enable-sysvsem \
+--enable-sysvshm \
+--enable-sockets \
+--with-curl \
+--with-zlib \
+--enable-zip \
+--with-bz2 \
+--with-readline
+
+# make -j8
+# make install
+
+参数说明：
+
+""" 安装路径 """
+--prefix=/usr/local/php56 \
+""" php.ini 配置文件路径 """
+--with-config-file-path=/usr/local/php56/etc \
+""" 优化选项 """
+--enable-inline-optimization \
+--disable-debug \
+--disable-rpath \
+--enable-shared \
+""" 启用 opcache，默认为 ZendOptimizer+(ZendOpcache) """
+--enable-opcache \
+""" FPM """
+--enable-fpm \
+--with-fpm-user=www \
+--with-fpm-group=www \
+""" MySQL """
+--with-mysql=mysqlnd \
+--with-mysqli=mysqlnd \
+--with-pdo-mysql=mysqlnd \
+""" 国际化与字符编码支持 """
+--with-gettext \
+--enable-mbstring \
+--with-iconv \
+""" 加密扩展 """
+--with-mcrypt \
+--with-mhash \
+--with-openssl \
+""" 数学扩展 """
+--enable-bcmath \
+""" Web 服务，soap 依赖 libxml """
+--enable-soap \
+--with-libxml-dir \
+""" 进程，信号及内存 """
+--enable-pcntl \
+--enable-shmop \
+--enable-sysvmsg \
+--enable-sysvsem \
+--enable-sysvshm \
+""" socket & curl """
+--enable-sockets \
+--with-curl \
+""" 压缩与归档 """
+--with-zlib \
+--enable-zip \
+--with-bz2 \
+""" GNU Readline 命令行快捷键绑定 """
+--with-readline
+
+# make clean
+# make clean all
+
+# ./configure ...
+# make -j8
+# make install
+
+Installing PEAR environment:      /usr/local/php/lib/php/
+[PEAR] Archive_Tar    - installed: 1.3.12
+[PEAR] Console_Getopt - installed: 1.3.1
+[PEAR] Structures_Graph- installed: 1.0.4
+[PEAR] XML_Util       - installed: 1.2.3
+[PEAR] PEAR           - installed: 1.9.5
+Wrote PEAR system config file at: /usr/local/php/etc/pear.conf
+You may want to add: /usr/local/php/lib/php to your php.ini include_path
+/home/tool/php-5.6.2/build/shtool install -c ext/phar/phar.phar /usr/local/php/bin
+ln -s -f /usr/local/php/bin/phar.phar /usr/local/php/bin/phar
+
+cp /usr/local/php/sbin/php-fpm /etc/init.d/php-fpm
+

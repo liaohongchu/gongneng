@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+
+<body>
+<div id="main" class="mai">
+	<div data-id="1">1111111</div>
+    <div data-id="3">2222222</div>
+    <div data-id="2">3333333</div>
+    <div data-id="4">4444444</div>
+    <div data-id="5">5555555</div>
+</div>
+</body>
+<script>
+    var obj=document.getElementById('main');
+	var aDiv = obj.getElementsByTagName('div');
+	var arr = [];
+	for(var i=0;i<aDiv.length;i++)
+	{
+		arr.push(aDiv[i]);  //aDiv是元素的集合，并不是数组，所以不能直接用数组的sort进行排序。
+	}
+	arr.sort(function(a,b){return a.getAttribute('data-id') - b.getAttribute('data-id')});
+	for(var i=0;i<arr.length;i++)
+	{
+		//alert(arr[i]);
+		obj.appendChild(arr[i]); //将排好序的元素，重新塞到body里面显示。
+	}
+</script>
+
+
+</html>
+
+
+ <script type="text/javascript">
+        var objectList = new Array();
+        function Persion(name,age){
+            this.name=name;
+            this.age=age;
+            }
+        objectList.push(new Persion('jack',20));
+        objectList.push(new Persion('tony',25));
+        objectList.push(new Persion('stone',26));
+        objectList.push(new Persion('mandy',23));
+        //按年龄从小到大排序
+        objectList.sort(function(a,b){
+            return a.age-b.age});
+        for(var i=0;i<objectList.length;i++){
+            document.writeln('<br />age:'+objectList[i].age+' name:'+objectList[i].name);
+            }
+    </script>
+
+
+=================
+<script type="text/javascript">
+        var arrSimple2=new Array(1,8,7,6);
+        arrSimple2.sort(function(a,b){
+            return b-a});
+        document.writeln(arrSimple2.join());
+    </script>
+    解释：a,b表示数组中的任意两个元素，若return > 0 b前a后；reutrn < 0 a前b后；a=b时存在浏览器兼容
+    简化一下：a-b输出从小到大排序，b-a输出从大到小排序。

@@ -1,0 +1,14 @@
+IP端口访问条件：
+#Listen 12.34.56.78:80
+Listen 80
+Listen 8000
+<VirtualHost *:8000>
+ServerName 204.44.101.181
+DocumentRoot "/home/website/web1/"
+<Directory "/home/website/web1/">
+    Options Indexes FollowSymLinks ExecCGI
+    Order allow,deny
+    Allow from all
+    AllowOverride All
+</Directory>
+</VirtualHost>

@@ -1,0 +1,31 @@
+https://blog.csdn.net/maxzero/article/details/81410620
+一、先确认Linux中smb正确配置
+可以使用命令
+smbclient -L //localhost/
+
+本人初学分享：win10访问samba 显示拒绝访问的解决 命令登录samba
+http://tieba.baidu.com/p/5704870113
+net use \\192.168.187.20\dockertwo
+
+ vi /etc/samba/smb.conf
+[global]
+        workgroup = SAMBA
+        security = user
+
+        passdb backend = tdbsam
+
+        printing = cups
+        printcap name = cups
+        load printers = yes
+        cups options = raw
+
+添加samba用户sarah：
+https://www.linuxcool.com/smbpasswd
+
+[tools]
+    comment = Public Stuff
+    path = /root/swoole
+    read only = No
+    guest ok = Yes
+
+service smb restart

@@ -1,0 +1,164 @@
+http://blog.csdn.net/fengda2870/article/details/14095137
+killall pure-ftpd
+    service pure-ftpd stop
+    service pure-ftpd start
+    service pure-ftpd status
+
+/usr/local/pureftpd/sbin/pure-ftpd restart
+
+源码安装Pure-FTPd 搭建ftp服务器   netstat -ntpl |grep 21
+http://biancheng.dnbcw.info/linux/345528.html
+PureFTPD安装备忘
+http://www.2cto.com/os/201306/221800.html
+
+#配置编译参数，偷懒--everything
+./configure --with-everything --with-language=simplified-chinese
+#编译、安装
+make
+make install
+
+http://blog.csdn.net/white__cat/article/details/27095257
+./configure --prefix=/usr/local/pureftpd \
+　　　　　  --with-mysql= \
+                    --with-paranoidmsg \
+                    --with-shadow \
+                    --with-welcomemsg \
+                    --with-uploadscript \
+                    --with-quotas \
+                    --with-cookie \
+                    --with-virtualhosts \
+                    --with-diraliases \
+                   --with-sysquotas \
+                   --with-ratios \
+                   --with-ftpwho \
+                   --with-throttling \
+                   --with-language=simplified-chinese
+# make
+# make install 
+[root@server pure-ftpd-1.0.22]#make && make install
+[root@server pure-ftpd-1.0.22]#cp configuration-file/pure-config.pl /usr/local/pureftpd/bin/
+[root@server pure-ftpd-1.0.22]#cp configuration-file/pure-ftpd.conf /usr/local/pureftpd/etc/
+[root@server pure-ftpd-1.0.22]#cp contrib/redhat.init /etc/init.d/pureftpd （这个脚本可以用来实现自启动）
+[root@server pure-ftpd-1.0.22]#ls ./*.conf
+./pureftpd-ldap.conf ./pureftpd-mysql.conf ./pureftpd-pgsql.conf
+[root@server pure-ftpd-1.0.22]#cp ./*.conf /usr/local/pureftpd/etc/
+[root@server pure-ftpd-1.0.22]#chmod +x /usr/local/pureftpd/bin/pure-config.pl
+
+启动方式 [root@server ~]#/usr/local/pureftpd/bin/pure-config.pl /usr/local/pureftpd/etc/pure-ftpd.conf
+Running: /usr/sbin/pure-ftpd -A -c50 -B -C8-D -fftp -H -I15 -lmysql:/etc/pureftpd-mysql.conf -L2000:8 -m4 -s -U133:022-u100 -j -k99 –Z
+看到以上内容，说明启动成功。
+
+添加虚拟用户在系统上所映射的用户和组：
+[root@server ~]#groupadd -g 1000 ftpgroup
+[root@server ~]#useradd -g ftpgroup -u 1000 -d /dev/null -s /sbin/nologin ftpuser
+添加虚拟用户：
+[root@server ~]#/usr/local/pureftpd/bin/pure-pw useradd zhang -u ftpuser -d /usr/local/src/ -m
+Password:
+Enter it again:
+
+
+
+------------------------
+首先，可以在系统中添加相应的用户和组，如用户ftpuser 和组ftpgroup 。
+
+    groupadd ftpgroup
+    useradd ftpuser -g ftpgroup -d /home/ftp -s /sbin/nologin
+
+第一种
+Pure-ftpd服务安装及虚拟用户设置
+http://www.douban.com/note/415638303/    不跟MYSQL结合, 用
+PureDB     /usr/local/pureftpd/etc/pureftpd.pdb //虚拟用户数据库
+也可以是能登录系统的用户，但最好是不能登录系统的用户，安全。
+第二种方式 数据库MYSQL
+Pure-FTPd虚拟用户的配置及基于MySQL的虚拟用户配置详解
+下载web管理程序pureadmin0.3  管理FTPuser
+2、用mysql认证
+<1>修改配置文件
+    vi /usr/local/pureftpd/etc/pure-ftpd.conf
+
+修改116行为：
+MySQLConfigFile               /usr/local/pureftpd/etc/pureftpd-mysql.conf
+
+INSERT INTO mysql.user (Host, User, Password, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv, File_priv, Grant_priv, References_priv, Index_priv, Alter_priv,ssl_cipher,x509_issuer,x509_subject) VALUES('localhost','ftp',PASSWORD('passwd'),'Y','Y','Y','Y','N','N','N','N','N','N','N','N','N','N','Y','Y','Y');
+CREATE DATABASE ftpusers;
+USE ftpusers;
+CREATE TABLE admin (
+Username varchar(35) NOT NULL default '',
+Password char(32) binary NOT NULL default '',
+PRIMARY KEY (Username)
+) ;
+INSERT INTO admin VALUES ('admin',MD5('123456'));
+CREATE TABLE `users` (
+`User` varchar(16) NOT NULL default '',
+`Password` varchar(32) binary NOT NULL default '',
+`Uid` int(11) NOT NULL default '14',
+`Gid` int(11) NOT NULL default '5',
+`Dir` varchar(128) NOT NULL default '',
+`QuotaFiles` int(10) NOT NULL default '500',
+`QuotaSize` int(10) NOT NULL default '30',
+`ULBandwidth` int(10) NOT NULL default '80',
+`DLBandwidth` int(10) NOT NULL default '80',
+`Ipaddress` varchar(15) NOT NULL default '*',
+`Comment` tinytext,
+`Status` enum('0','1') NOT NULL default '1',
+`ULRatio` smallint(5) NOT NULL default '1',
+`DLRatio` smallint(5) NOT NULL default '1',
+PRIMARY KEY (`User`),
+UNIQUE KEY `User` (`User`)
+) ;
+
+http://www1.yiyou.org/60PureAdmin_03_php.html
+http://www1.yiyou.org/docs/PureAdmin_03_php/PureAdmin-0.3.tar.gz
+
+tar xvf PureAdmin-0.3.tar.gz -C /var/www/html/
+tar xvf PureAdmin-0.3.tar.gz -C /home/website/web/
+ # cd /var/www/html/
+http://www.linuxidc.com/Linux/2014-06/103267p2.htm 映射 虚拟用户 
+可以通过 netstat -tl查看是否在监听21端口。
+
+建新用户
+
+# useradd –d /var/www -g ftp –s /sbin/nologin myftp
+
+说明：
+
+-s /sbin/nologin 是让其不能登陆系统
+-d 是指定用户目录为/var/www ，这里可以替换成任何你需要的目录。
+-g ftp 把用户加入到ftp组中(vsftp已创建)
+myftp是ftp用户名，在配置时把这个myftp换成你的ftp用户名。
+执行该命令后，如果出现这样的错误提示：
+useradd: warning: the home directory already exists.
+Not copying any file from skel directory into it.
+这说明用户的目录已经存在(/var/www，这个可以是任何你设定的目录)，不可再新建此目录，并非添加用户失败，可以忽略。 
+
+pure-ftpd认证错误与FTP登录530验证失败
+
+首先用adduser命令添加一个普通用户，命令如下：
+#adduser tommy  //添加一个名为tommy的用户
+#passwd tommy   //修改密码
+Changing password for user tommy.
+New UNIX password:     //在这里输入新密码
+Retype new UNIX password:  //再次输入新密码
+passwd: all authentication tokens updated successfully.
+
+http://www.cnblogs.com/daizhuacai/archive/2013/01/17/2865132.html
+linux 添加用户、权限
+groupadd ftpgroup
+useradd ftpuser -g ftpgroup -d /home/website -s /sbin/nologin
+password ftpuser
+ftpuser@
+
+用户的ID就是USER ID喽，也就是常说的UID.有一个文件专门存放UID信息的，在/etc/passwd里。root用户的ID是0.
+从1~499的大多是系统服务或软件厂商自定议的ID。而普通的用户的UID是从500开始往后依次加1.
+cat /etc/group
+你也可以用 cat /etc/passwd | grep <你的用户名>  来查看你的ID。
+[root@cloud ~]# cat /etc/passwd | grep ftpuser
+ftpuser:x:502:502::/home/website:/sbin/nologin
+
+[root@cloud sbin]# id ftpuser
+uid=502(ftpuser) gid=502(ftpgroup) groups=502(ftpgroup)
+
+530登陆配置失败 参考
+http://www.linuxidc.com/Linux/2013-06/85728.htm 要配置pureftpd-mysql.conf连接数据库文件.
+
+

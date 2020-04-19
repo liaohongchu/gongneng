@@ -1,0 +1,12 @@
+http://host.sonspring.com/portlets/
+
+http://bbs.csdn.net/topics/390112094
+
+http://www.17sucai.com/pins/4705.html
+
+http://www.ablanxue.com/prone_19276_1.html
+
+PHP+MySQL+jQuery实现随意拖动层并即时保存拖动位置 
+http://www.helloweba.com/view-blog-120.html
+
+http://ifxoxo.com/jquery-ui-sortable.html

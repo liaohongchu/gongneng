@@ -1,0 +1,40 @@
+http://www.yershop.com/index.php?s=/Home/Article/detail/id/111.html
+
+<html>
+<head>
+ <script src="jquery.min.js" type="text/javascript"></script>
+ </head>
+<script>
+    ;$(function(){
+       //全选的实现
+       $(".check-all").click(function(){
+           $(".ids").prop("checked", this.checked);
+       });
+       $(".ids").click(function(){
+           var option = $(".ids");
+           option.each(function(i){
+               if(!this.checked){
+                   $(".check-all").prop("checked", false);
+                   return false;
+               }else{
+                   $(".check-all").prop("checked", true);
+               }
+           });
+       });
+   
+   });
+</script>
+
+<body> 
+<center> 
+<input type="checkbox" id="selAll" class="check-all" />全选 
+
+<div id="allcheck"> 
+<input type="checkbox" name="checkAll" class="ids"   id="checkAll" onclick="setSelectAll();"/>足球<br> 
+<input type="checkbox" name="checkAll" class="ids"  id="checkAll" onclick="setSelectAll();"/>篮球<br> 
+
+</div>	
+</center> 
+</body> 
+</html> 
+<p>

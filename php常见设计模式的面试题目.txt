@@ -1,0 +1,141 @@
+熟悉swoole+mongodb功能操作，多房间分组发消息和私聊功能 。
+基于tp5框架开发，TP5开发商城后台管理系统。ERP京东仓库API对接，达达到店取货api对接。 赠酒网https://www.zengjiuw.com/
+会用迅搜(xunsearch) 全文搜索引擎,搭建MYSQL双主多从架构+keepalived高可用
+---------------------------------------------------
+操作java springmvc后台管理，了解操作android生成APP，和JBuilder操作
+动手操作MYSQL分布式架构搭建，HADOOP分布式框架搭建
+搭建过3台虚拟机hadoop,zookeeper,hbase大数据分布式框架。掌握了解PHP操作hbase,hive 列数据库和数据仓库。
+
+php常见的面试题目
+http://blog.csdn.net/haiqiao_2010/article/details/24792981
+
+503 : 服务器临时维护或过载。这个状态时临时性的。
+
+1.2 Include require include_once require_once 的区别.
+处理失败方式不同：
+require 失败时会产生一个致命级别错误，并停止程序运行。
+include 失败时只产生一个警告级别错误，程序继续运行。
+
+include_once/require_once和include/require 处理错误方式一样，
+唯一区别在于当所包含的文件代码已经存在时候，不在包含。
+
+
+
+sql left执行过程
+
+
+
+php单例模式
+https://www.cnblogs.com/wwjchina/p/7724271.html
+
+工厂模式https://www.cnblogs.com/DeanChopper/p/4764512.html
+
+适配器模式（PHP实现）
+https://www.cnblogs.com/whoamme/p/3324325.html
+
+注册树模式http://www.cnblogs.com/DeanChopper/p/4767181.html
+
+1观察者模式https://www.cnblogs.com/DeanChopper/p/4830134.html
+2观察者模式https://www.cnblogs.com/onephp/p/6108344.html
+
+多种模式 组合使用
+http://www.php.cn/php-weizijiaocheng-289505.html
+工厂模式 不用NEW 和 创建熟悉设置获取
+注册模式，全局共享和交换对象
+
+观察者模式应用 https://www.cnblogs.com/yujon/p/5538180.html
+
+23种设计模式https://my.oschina.net/botkenni/blog/1603660
+
+设计模式六大原则（PHP）https://www.cnblogs.com/lina520/p/7993478.html
+
+
+php面试之数据结构和算法 https://www.cnblogs.com/ghjbk/p/6673115.html
+冒泡排序，快速排序，插入排序，选择排序  https://www.cnblogs.com/wgq123/p/6529450.html
+用PHP实现一个双向队列（腾讯）
+<?php
+    class Deque{
+    private $queue=array();
+    public function addFirst($item){
+        return array_unshift($this->queue,$item);
+    }
+
+    public function addLast($item){
+        return array_push($this->queue,$item);
+    }
+    public function removeFirst(){
+        return array_shift($this->queue);
+    }
+
+    public function removeLast(){
+        return array_pop($this->queue);
+    }
+}
+?>
+
+php经典的5大设计模式
+https://blog.csdn.net/homelam/article/details/80179152
+
+TCP 3次握手https://blog.csdn.net/libaineu2004/article/details/80926810
+正常TCP建连接三次握手过程：
+第一步：client 发送 syn 到server 发起握手；
+第二步：server 收到 syn后回复syn+ack给client；
+第三步：client 收到syn+ack后，回复server一个ack表示收到了server的syn+ack（此时client的56911端口的连接已经是established）。
+
+HTTP 消息结构
+请求行  请求头部  空行  请求数据
+
+状态行  消息报头  空行  响应正文
+
+整理了一份招PHP高级工程师的面试题
+https://www.cnblogs.com/rrsina/p/3981097.html
+一. 基本知识点
+1.1 HTTP协议中几个状态码的含义:503 500 401 403 404 200 301 302。。。
+200 : 请求成功，请求的数据随之返回。
+301 : 永久性重定向。
+302 : 暂时行重定向。
+401 : 当前请求需要用户验证。
+403 : 服务器拒绝执行请求，即没有权限。
+404 : 请求失败，请求的数据在服务器上未发现。
+500 : 服务器错误。一般服务器端程序执行错误。
+503 : 服务器临时维护或过载。这个状态时临时性的。
+
+ echo "昨天:".date("Y-m-d",strtotime("-1 day")), "<br>";       
+echo "明天:".date("Y-m-d",strtotime("+1 day")). "<br>";    
+
+你是如何监控你们的数据库的？你们的慢日志都是怎么查询的？
+监控的工具有很多，例如zabbix，lepus，我这里用的是lepus
+
+php 经典的算法题你懂的
+https://blog.csdn.net/chaoluo001/article/details/70597847
+
+PHP 经典有趣的算法收集（面试题）
+https://blog.csdn.net/a519395243/article/details/77942913
+PHP的几种排序算法的比较
+https://www.cnblogs.com/jing1208/p/6289840.html
+PHP面试常用算法(推荐)  http://www.sohu.com/a/163052121_763273
+
+PHP实现各种经典算法 https://www.cnblogs.com/hellohell/p/5718175.html
+
+用 PHP 的方式实现的各类算法合集 https://segmentfault.com/a/1190000010818230
+php 四种基础算法集合 https://blog.csdn.net/rainredhezhang/article/details/78711162 记住这4种
+
+PHP经典算法集锦【经典收藏】https://www.jb51.net/article/92609.htm
+
+PHP实现的权重算法示例 https://www.jb51.net/article/156344.htm
+php概率算法https://www.cnblogs.com/tinyphp/p/3513459.html
+
+TCP的三次握手与四次分手 https://www.cnblogs.com/leezhxing/p/4524176.html
+
+悲观锁：在读取数据时锁住那几行，其他对这几行的更新需要等到悲观锁结束时才能继续 。
+乐观所：读取数据时不锁，更新时检查是否数据已经被更新过，如果是则取消当前更新，一般在悲观锁的等待时间过长而不能接受时我们才会选择乐观锁。
+
+有空看的设计模式
+观察者模式 https://www.jb51.net/article/104437.htm 
+适配器模式 https://www.jb51.net/article/57831.htm
+策略模式 https://blog.csdn.net/clevercode/article/details/45722661
+
+协程理解
+php实现协程，真正的异步http://www.cnblogs.com/yulibostu/articles/9792228.html
+
+

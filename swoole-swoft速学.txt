@@ -1,0 +1,46 @@
+https://gitee.com/swoole/swoole
+cd swoole-src && \
+phpize && \
+./configure && \
+make && sudo make install
+make && make install
+https://www.cnblogs.com/zouke1220/p/10834746.html composer 镜像
+composer config -g repo.packagist composer https://packagist.phpcomposer.com
+
+文档https://www.easyswoole.com/Cn/QuickStart/example.html
+我们先安装好swooole拓展，执行 php --ri swoole 确保可以看到swoole拓展最版本为4.4.8
+useradd swoole
+passwd swoole    swoole123
+
+su - swoole
+
+sudo chmode -R 777 /root/swoole
+1、修改 tmp 目录所属用户为 root，用户组为 root
+chown -R swoole:swoole /root/swoole/Test
+chmod 777 /root
+
+swoft速学：数据库配置、实体定义
+https://blog.csdn.net/github_26672553/article/details/82151649
+
+Reactor以多线程的方式运行
+
+Worker以多进程的方式运行
+
+TaskWorker以多进程的方式运行
+
+
+   2.php使用pcntl来进行多进程编程，
+
+   3.PHP使用pthreads来进行多线程编程，
+
+swoft速学：加载bean、属性注入；案例:商品参数过滤
+https://blog.csdn.net/github_26672553/article/details/82223086
+
+swoft服务端和客户端的创建
+https://blog.csdn.net/github_26672553/article/details/82784834
+
+swoft速学：数据库配置、实体定义
+https://blog.csdn.net/github_26672553/article/details/82151649
+
+Swoft 踩坑笔记十一 - Task 异步任务
+https://blog.csdn.net/weikaixxxxxx/article/details/85102720

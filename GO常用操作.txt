@@ -1,0 +1,138 @@
+WEB后台应用
+https://github.com/winlion/restgo-admin/
+
+Golang连接mysql数据库
+https://blog.csdn.net/naiwenw/article/details/79281220
+
+Go 中文开发手册
+https://www.php.cn/manual/view/35168.html
+
+
+Golang之beego读取配置信息，输出log模块
+https://cloud.tencent.com/developer/article/1200547
+
+
+Windows下搭建Beego框架
+https://blog.csdn.net/xiaonaiquan/article/details/74993879
+
+
+window下编译linux可以运行的golang程序（亲测可用）
+https://blog.csdn.net/u014265398/article/details/90024607
+
+
+
+postman，sublime，Navicat，xshell，winscp，svn，docker，redis
+
+https://www.cnblogs.com/zhouqi666/p/10141265.html 看
+
+go get github.com/astaxie/beego 
+go get golang.org/x/net/websocket
+
+~/.bashrc ，而我在配置了 /etc/profile
+vi ~/.profile
+
+go get golang.org/x/net/websocket  
+失败解决 https://www.cnblogs.com/lanyangsh/p/9190296.html
+
+go-无法下载websocket的问题
+https://www.cnblogs.com/niutao/p/10593024.html
+
+Unity 3D  白鹭（Egret）  Cocos2d-x
+
+LollipopGo开源游戏服务器框架--网络基础模块源码
+https://studygolang.com/articles/17439?fr=sidebar
+
+golang 实现代付充值系统
+https://studygolang.com/articles/25544#reply1
+
+假设现在有下面 JSON 格式的数据:
+{
+        "id":1,
+        "name":"jojo",
+        "email":"123@qq.com",
+}
+
+使用 JSON 进行编码，得出byte长度为43的的二进制数据：
+7b226964 223a312c 226e616d 65223a22 6a6f6a6f 222c2265 6d61696c 223a2231 32334071 712e636f 6d227d
+
+如果使用 Protobuf 进行编码，得到的二进制数据仅有20个字节：
+0a046a6f 6a6f1001 1a0a3132 33407171 2e636f6d
+
+golang设计模式之建造者模式
+https://blog.csdn.net/Jeanphorn/article/details/77823568
+
+Go语言工厂模式自动注册——管理多个包的结构体
+http://c.biancheng.net/view/92.html
+
+Golang-一些常用的方法集合
+https://blog.csdn.net/qq_28796345/article/details/81393063
+
+beego入门文档   改变模板位置
+https://blog.csdn.net/zdyueguanyun/article/details/52916481
+
+Golang中闭包的理解
+https://blog.csdn.net/qq_35976351/article/details/81986496
+
+golang socket断点续传大文件
+https://blog.csdn.net/luckytanggu/article/details/79830493
+
+临时关闭SELinux 
+setenforce 0
+Go语言之高级篇beego框架之model设计构造查询
+https://www.bbsmax.com/A/amd0v6B1Jg/
+
+你随时随地都可以格式化下代码
+这里的mac 的快捷方式
+window
+ctrl+alt+i
+
+go---通道的高级玩法
+https://blog.csdn.net/u012319493/article/details/88561598
+
+Go语言多人聊天室项目实战
+http://www.52codes.net/develop/shell/58985.html
+https://blog.csdn.net/lengyuezuixue/article/details/78928039 也操作下
+
+Golang Tcp粘包处理（转）包头+数据的格式，根据包头信息读取到需要分析的数据。
+https://www.cnblogs.com/juepei/p/4421569.html
+
+golang中解决tcp传输中的粘包问题  拿来用
+https://blog.csdn.net/weixin_33836874/article/details/90254751
+
+分布式消息队列RabbitMQ  KAFKA
+
+Go实现网页爬虫  Pholcus https://gitee.com/yhtmxl/pholcus
+https://www.cnblogs.com/jianyingjie/p/11628027.html
+
+四川麻将玩法, 血战到底(三人模式/四人模式)服务器程序, 房卡模式, 支持俱乐部.
+https://github.com/lonng/nanoserver
+
+golang(Go语言) byte/[]byte 与 二进制形式字符串 互转
+https://blog.csdn.net/qq245671051/article/details/52693359/
+
+Go语言JSON与Byte[]转化
+https://my.oschina.net/iyf/blog/552640
+
+Go高级开发
+https://books.studygolang.com/advanced-go-programming-book/ch1-basic/ch1-01-genesis.html
+
+go开源项目整理-新手篇
+https://blog.csdn.net/haolipengzhanshen/article/details/78205942
+
+Sniper轻量级业务框架 cobra
+https://github.com/bilibili/sniper
+
+从零开始写Go网络通信框架
+http://php-note.com/article/1299.html
+通道 
+https://www.runoob.com/go/go-concurrent.html
+Go深入学习
+http://c.biancheng.net/view/96.html
+看到这里http://c.biancheng.net/view/4513.html
+
+https://blog.csdn.net/weixin_42117918/article/details/81839330
+注：栈的顺序存储结构可以理解为：通过结构体对数组进行操作；栈的链式存储结构可以理解为：
+通过结构体对链表进行操作。
+
+重要：进程与线程的区别
+https://www.jianshu.com/p/2dc01727be45

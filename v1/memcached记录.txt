@@ -1,0 +1,18 @@
+ /usr/bin/yum --version
+
+http://sourceforge.net/projects/levent/files/libevent/libevent-2.0/libevent-2.0.22-stable.tar.gz/download
+
+http://memcached.org/files/memcached-1.4.22.tar.gz
+
+ ./configure --prefix=/usr  make && make install
+
+
+
+./configure --with-libevent=/usr
+
+
+
+/usr/local/bin/memcached -d -m 20 -u root -l 204.44.101.181 -p 11211 -c 256 -P /tmp/memcached.pid
+
+
+telnet 204.44.101.181 11211  镜像 使用不同主机分流主要流量       

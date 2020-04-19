@@ -1,0 +1,5 @@
+E:\wwwroot\xinsheng\v2_background\Timer\   h5
+
+php /data/web/price/v2_background/Timer/localtime_lock.php h5/syncaccounttest sync_accounttest   1020  执行这个一下
+
+php.exe -f E:/wwwroot/xinsheng/v2_background/Timer/localtime_lock.php h5/syncaccounttest sync_accounttest   1020

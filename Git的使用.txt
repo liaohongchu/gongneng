@@ -1,0 +1,16 @@
+Git客户端(TortoiseGit)基本使用详解
+
+https://www.cnblogs.com/xuwenjin/p/8573603.html
+
+…or create a new repository on the command line
+echo "# tp6" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/liaohongchu/tp6.git
+git push -u origin master
+
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/liaohongchu/tp6.git
+git push -u origin master

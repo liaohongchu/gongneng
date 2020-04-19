@@ -1,0 +1,5 @@
+sublime功能很强大,
+
+但是使用sublime就可以实现代码自动重新缩进,使代码缩进重排
+
+方法:Ctrl+A选中全部内容，然后在菜单中选择Edit->Line->Reindent

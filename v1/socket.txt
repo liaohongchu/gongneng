@@ -1,0 +1,11 @@
+http://blog.163.com/sky20081816@126/blog/static/1647610232010794826825/
+
+http://fighter.blog.51cto.com/1318618/1533957
+window 查看端口 netstat -a
+
+看这个 成功了
+http://www.sharejs.com/codes/php/5835
+ 
+聊天室http://www.lianyue.org/2013/2511/
+
+php socket 服务器何必自己写呢，用 workerman socket 服务器框架啊，

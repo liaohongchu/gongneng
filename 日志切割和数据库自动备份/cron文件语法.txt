@@ -1,0 +1,32 @@
+  分     小时    日       月       星期     命令
+
+      0-59   0-23   1-31   1-12     0-6     command     (取值范围,0表示周日一般一行对应一个任务)
+
+     记住几个特殊符号的含义:
+
+         “*”代表取值范围内的数字,
+         “/”代表”每”,
+         “-”代表从某个数字到某个数字,
+         “,”分开几个离散的数字
+
+
+30     5      *           *     *     ls             指定每天的 5:30 执行ls命令
+
+1) 在命令行输入: crontab -e 然后添加相应的任务，wq存盘退出。
+
+      2)直接编辑/etc/crontab 文件，即vi /etc/crontab，添加相应的任务
+          11 2 21 10 * rm -rf /mnt/fb  
+===================\
+* 3 * * * root /home/dbbak/nginx_log.sh
+* 4 * * * root /home/dbbak/xinqqdbbak.sh
+
+----------------------
+
+-----------------------
+分为两种情况：（还有一种情况，当需要传递参数的时候，可以考虑用linux的curl）
+第一种情况：你的php脚本中没有引入其他PHP文件，也就是说没有include,require_once等命令的PHP文件
+* */1 * * * /usr/local/php/bin/php  /var/www/html/wwwroot/web/script.php （每一小时执行一次script.php）
+注意，这样写需要把PHP变成可执行的脚本文件。在命令行下，脚本所在目录
+chmod +x script.php
+注意：你的script.php文件中一定要在开始处加上: #!/usr/local/php/bin/php -q ，下面是一个完整的script.php文件代码
+http://www.cnblogs.com/thinksasa/archive/2013/06/06/3121030.html

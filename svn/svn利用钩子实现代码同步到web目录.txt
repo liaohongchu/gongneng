@@ -1,0 +1,4 @@
+"C:\Program Files\VisualSVN Server\bin\svn.exe" update "C:\wwwroot\demo" --quiet --username svn --password svn123
+
+
+同步SVN代码 到WEB发布网站 C:\wwwroot\demo 必须是checkout

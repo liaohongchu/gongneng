@@ -1,0 +1,50 @@
+https://www.cnblogs.com/lza945/p/10138294.html
+https://blog.csdn.net/chao821/article/details/81744609
+
+service rabbitmq-server restart
+
+sudo rabbitmqctl add_user mquser 123456
+
+sudo rabbitmqctl set_user_tags mquser administrator-给该用户管理员权限
+
+golang rabbitmq实践 (二 实现简单的消息收发)
+https://www.cnblogs.com/shi-meng/p/4800080.html
+
+RabbitMQ 命令行的基本操作
+https://blog.csdn.net/weixin_34195364/article/details/88030441
+
+启动应用：rabbitmqctl  start_app
+停止应用： rabbitmqctl  stop_app
+节点状态：rabbitmqctl status
+
+1. 关闭与启动
+
+ ① 到指定目录：cd/etc/init.d
+
+ ② 停止：rabbitmq-server stop
+
+ ③ 启动：rabbitmq-server start
+
+ ④ 查看是否停止/启动成功：ps -ef |grep rabbitmq
+
+ 
+
+2.开启RabbitMQ Managerment管理界面
+
+① 到指定目录：cd /usr/lib/rabbitmq/lib/rabbitmq_server-3.1.5/plugins
+
+② 开启管理界面：./rabbitmq-plugins enable rabbitmq_management
+
+③ 重启RabbitMQ
+
+http://raylei.cn/index.php/archives/48/  rabbitmq例子入门教程
+
+AMQP协议端口默认：5672
+Web页面默认端口：15672
+MQTT协议默认端口：1883
+默认登录用户名（admin权限）：guest
+默认登录密码：guest
+https://blog.csdn.net/qq_29167297/article/details/92767043 rabbitmq集群搭建
+
+RabbitMQ详解（三）------RabbitMQ的五种模式
+https://www.cnblogs.com/Alva-mu/p/9535396.html

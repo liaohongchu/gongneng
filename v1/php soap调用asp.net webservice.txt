@@ -1,0 +1,98 @@
+http://blog.sina.com.cn/s/blog_5b68649a0101dtgi.html
+function send_sms($data = array())
+{
+    import('@.ORG.Nusoap.nusoap','','.php');
+    $sms_api = C('SMS_API');
+    
+    if(!$data)
+        return false;
+
+    
+    
+        
+    if($sms_api['ltsms'])//家校通
+    {
+        $client = new \nusoap_client($sms_api['ltsms'],true,false,false,false,false,10,90,'');
+        $client->soap_defencoding = 'utf-8';
+        $client->decode_utf8 = true;
+        $client->xml_encoding = 'utf-8';
+        $err = $client->geterror();
+        
+        $setting_model = D('setting');
+
+        //以学校为单位，批量发送
+        $school_data = array();
+        foreach($data as $value)
+        {
+            $value['plat_id'] = intval($value['plat_id']);
+            
+            if($value['plat_id']>0)//大于0，检测是否可以发短信，不可以发就直接返回失败
+            {
+                $setting_remind = $setting_model->c('REMIND',$value['plat_id']); 
+                
+                
+                if(!$setting_remind['sms'])//不可发
+                {
+                     error_log("\r\n".' -- Send SMS ERROR  By Plat_id '.$value['plat_id'].' --Not Setting REMIND sms-- ' . date("Y-m-d H:i:s") ."\r\n" ,3,SITE_DIR.'Uploads/log/'.date("Y-m-d").'_send_sms'.C('LOG_FILE_NAME_KEY').'.log');
+                    return false;
+                }
+            }
+            
+            
+            
+            if(!$value['arc_school'])
+            {
+                $value['arc_school'] = 0;
+                //continue;//学校ID为空  测试时 也可以发
+            }else if($value['arc_uid']<=0)
+            {
+                $value['arc_uid'] = 0;
+                continue;//新短信接口，没id发不出
+            }
+
+            $school_data[$value['arc_school']][] = $value;
+        }
+        //$trans = true;
+        $usccess_num = 0;
+        foreach($school_data as $school_id=>$item)
+        {
+            $XML_TASK = array();
+            foreach($item as $value)
+            {
+                if(!$value['sms_mobile'])
+                    continue;
+                
+               // $XML_TASK[] = '<task><targetid>'.$value['sms_mobile'].'</targetid><Subid>1990</Subid><createdaccount>1</createdaccount><type>SMS_SCMSG</type><content>'.$value['sms_content'].'</content><StatisticsId>'.(int)$value['id'].'</StatisticsId></task>';
+                $XML_TASK[] = '<task><targetid>'.$value['sms_mobile'].'</targetid><createdaccount>1</createdaccount><type>SMS_SCMSG</type><content>'.$value['sms_content'].'</content><StatisticsId>'.(int)$value['id'].'</StatisticsId><SendName>'.$value['arc_realname'].'</SendName><SendUser>'.$value['arc_uid'].'</SendUser><Subid>'.$value['arc_uid'].'03</Subid></task>';
+            }
+            if(!$XML_TASK)
+                continue;
+                
+            $XML = '<sms modelType="Default">'.implode('',$XML_TASK).'</sms>';
+            $UserName = $school_id;
+            $info = array(
+                'xml' => $XML,
+                'UserName' => $UserName,
+                'PassWord' => '',
+                'smsType' => 'SMS_SCMSG'
+            );
+            //print_R($info);exit;
+            $result = $client->call('Send',$info);
+            if($result['SendResult'] > 0)
+            {
+                $usccess_num +=$result['SendResult'];
+                //$trans = true;
+                error_log("\r\n".' -- Send SMS (Count TASK = '.count($XML_TASK).' , SUCCESS = '.$result['SendResult'].')  By Api [ltsms] -- ' . date("Y-m-d H:i:s") . "\r\n" ,3,SITE_DIR.'Uploads/log/'.date("Y-m-d").'_send_sms'.C('LOG_FILE_NAME_KEY').'.log');
+            }else
+            {
+                //$trans = false;
+                error_log("\r\n".' -- Send SMS ERROR  By Api [ltsms] -- ' . date("Y-m-d H:i:s") . "\r\n".' -------- Start XML:'."\r\n".$XML."\r\n".'-------- End XML'."\r\n" ,3,SITE_DIR.'Uploads/log/'.date("Y-m-d").'_send_sms'.C('LOG_FILE_NAME_KEY').'.log');
+            }
+        }
+        //返回成功条数
+        return $usccess_num;
+    }else
+    {
+        return false;
+    }
+}

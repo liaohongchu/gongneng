@@ -1,0 +1,8 @@
+https://www.runoob.com/cplusplus/cpp-basic-syntax.html
+
+https://www.runoob.com/cplusplus/cpp-variable-scope.html
+
+C++运行环境
+https://www.cnblogs.com/HDK2016/p/10205390.html
+
+http://c.biancheng.net/view/2317.html  学习C++

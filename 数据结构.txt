@@ -1,0 +1,25 @@
+C语言入门
+http://c.biancheng.net/view/187.html
+看到这里http://c.biancheng.net/view/2068.html
+
+
+https://zhidao.baidu.com/question/28652338.html
+
+数据结构分为8类有：数组、栈、队列、链表、树、散列表、堆、图。
+数据结构是指相互之间存在着一种或多种关系的数据元素的集合和该
+集合中数据元素之间的关系组成 。 
+
+汉诺塔的理解问题
+https://blog.csdn.net/qq_41000094/article/details/82218830
+
+进制详解：二进制、八进制和十六进制
+http://c.biancheng.net/view/1724.html
+
+图的基本概念详解
+https://blog.csdn.net/shuiyixin/article/details/83692474
+
+C语言判断数组中是否包含某个元素
+http://c.biancheng.net/view/1830.html
+
+C语言对数组元素进行排序（冒泡排序法）
+http://c.biancheng.net/view/1838.html

@@ -1,0 +1,9 @@
+http://blog.csdn.net/neubuffer/article/details/16901149
+
+4、设置开机启动
+
+#chkconfig php-fpm on
+
+至此，大功告成。可以用命令 chkconfig 查看开机启动服务列表
+
+yum install -y zip unzip

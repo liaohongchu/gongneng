@@ -1,0 +1,133 @@
+ CentOS 7 上编译安装MySQL 5.6.23 
+http://blog.csdn.net/skykingf/article/details/44776057
+8.修改目录和文件权限，安装默认数据库 
+    cd /usr/local/mysql  
+    sudo chown -R mysql .  
+    sudo chgrp -R mysql .  
+    sudo scripts/mysql_install_db --user=mysql  
+
+
+Can’t connect to local MySQL server through socket ‘/var/lib/mysql/mysql.sock’解决方法 
+http://www.cnblogs.com/eoiioe/archive/2008/12/28/1363947.html
+
+*************************************************************8
+ps -ef|grep mysql 查看MYSQL安装路径  which cmake 看看有没有路径
+a. 查找已安装的myslq 版本：
+#rpm  -qa | grep  mysql （注意大小写，如果mysql 不行就换MySQL） 
+
+4.1 service mysqld stop (停止服务)
+4.2 rm -fr /var/lib/mysql/* (删除/var/lib/mysql下的所有文件)
+4.3 rm /var/lock/subsys/mysqld(删除锁定文件)
+4.4 killall mysqld (杀死所有mysqld进程)
+4.5 service mysql start (启动mysql服务。)
+
+#如果没关闭，执行kill -9 端口号
+
+MySQL 操作使用http://server.chinabyte.com/279/2616279.shtml
+ Linux CentOS6.5下编译安装MySQL 5.6.16【给力详细教程】 
+http://blog.csdn.net/wendi_0506/article/details/39478369
+
+Centos 5.2下安装多个mysql数据 （很完整 ）
+http://www.myhack58.com/Article/48/66/2014/51049.htm
+
+mysql独立安装
+wget http://dev.mysql.com/get/Downloads/MySQL-5.5/mysql-5.5.36.tar.gz
+
+http://www.2cto.com/os/201404/296364.html
+
+cmake \
+-DCMAKE_INSTALL_PREFIX=/home/local/mysql3307 \
+-DMYSQL_DATADIR=/home/local/mysql3307/data \
+-DMYSQL_UNIX_ADDR=/home/local/mysql3307/mysql.sock \
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \
+-DWITH_MYISAM_STORAGE_ENGINE=1 \
+-DENABLED_LOCAL_INFILE=1 \
+-DMYSQL_TCP_PORT=3307 \
+-DEXTRA_CHARSETS=all \
+-DDEFAULT_CHARSET=utf8 \
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DMYSQL_USER=mysql \
+-DWITH_DEBUG=0
+
+
+Make && make install
+
+解决方法
+
+Step1:
+# rm CMakeCache.txt
+
+
+Step2:
+# yum install ncurses-devel
+
+yum install gcc-c++ -y
+
+yum install bison
+
+Make && make install
+
+/usr/local/mysql/scripts/mysql_install_db --user=mysql --defaults-file=/usr/local/mysql/my.cnf --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --socket=/usr/local/mysql/mysql.sock
+
+You can start the MySQL daemon with:
+
+  cd . ; /usr/local/mysql/bin/mysqld_safe &
+
+
+##/home/local/mysql3307/bin/mysqld_safe --user=root
+
+/home/local/mysql3307/scripts/mysql_install_db --user=mysql --defaults-file=/home/local/mysql3307/my.cnf --basedir=/home/local/mysql3307 --datadir=/home/local/mysql3307/data --socket=/home/local/mysql3307/mysql.sock
+
+/home/local/mysql3307/scripts/mysql_install_db --help
+
+
+
+
+
+启动3308端口的mysql服务   mysql -u用户名 -p密码 -P端口号 -hip地址
+/home/local/mysql3307/bin/mysqld_safe  --user=mysql --defaults-file=/home/local/mysql3307/my.cnf --basedir=/home/local/mysql3307 --datadir=/home/local/mysql3307/data --socket=/home/local/mysql3307/mysql.sock
+
+chmod +w /home/local/mysql3307
+chown -R mysql:mysql /home/local/mysql3307/
+
+
+安装初始化数据库的时候要指定my.cnf的位置
+/home/local/mysql3307/scripts/mysql_install_db --user=mysql --defaults-file=/home/local/mysql3307/my3307.cnf
+记得对/data/dbdata3/my.cnf更改数据文件的存放路径，以及目录端口等等
+启动mysql的时候也要指定my.cnf
+/home/local/mysql3307/bin/mysqld_safe --defaults-file=/home/local/mysql3307/my.cnf --user=mysql & 
+
+cp /home/local/mysql3307/support-files/mysql.server /etc/init.d/mysqld3307  启动MYSQL /etc/init.d/mysqld3307 start
+
+bin/mysqld_safe &
+
+ps -ef|grep mysqld 看看是否有mysqld_safe 和mysqld进程   find / -name mysql.sock
+# mysqld_safe --skip-grant-tables &
+&，表示在后台运行，不再后台运行的话，就再打开一个终端咯。
+# mysql
+mysql> use mysql;
+mysql> UPDATE user SET password=password("test123") WHERE user='root';   
+mysql> flush privileges;
+mysql> exit;      
+
+
+scripts/mysql_install_db --basedir=/home/local/mysql3307 --datadir=/home/local/mysql3307/data --user=mysql  //初始化mysql数据库 
+cp support-files/my-medium.cnf /usr/local/mysql/my.cnf //copy配置文件 
+
+/home/local/mysql3307/bin/mysql -u root mysql
+
+一般看下有没有进程在跑mysql
+ 
+ps aux |grep mysql
+ 
+然后kill 掉
+
+
+1.#ps -A|grep mysql
+   显示类似：
+  1829 ?        00:00:00 mysqld_safe
+   1876 ?        00:00:31 mysqld
+  2.#kill -9 1829
+  3.#kill -9 1876
+  4.#/etc/init.d/mysql restart
+  5.#mysql -u root -p

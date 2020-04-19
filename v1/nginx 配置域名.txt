@@ -1,0 +1,175 @@
+﻿ps -aux | grep mysqld
+查看mysql是否在监 听端口命令
+netstat -tl | grep mysql
+2、Mysql启动、停止、重启常用命令
+a、启动方式
+1、使用 service 启动：
+[root@localhost /]# service mysqld start (5.0版本是mysqld)
+[root@szxdb etc]# service mysql start (5.5.7版本是mysql) 
+ 
+解决GD 
+./configure --prefix=/usr/local/php --enable-fpm --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gd --with-freetype-dir=/usr/local/freetype --with-jpeg-dir=/usr/local/jpeg  --enable-gd-native-ttf  --enable-gd-jis-conv
+
+./configure -help|grep gd   ./configure -help|grep php-fpm
+./configure -help|mysql  ./configure -help|grep mysql  yum install freetype
+
+/usr/local/nginx/logs   /usr/local/php  /home/tool/php-5.6.3
+/usr/local/php/lib
+
+locate 'nginx$'
+看看装哪里了，然后删了呗……
+
+重新编译PHP  nginx使用fastcgi方式连接php，  http://shiq-stone.iteye.com/blog/1103688
+
+查看进程 ps aux|grep php  查看监听端口 netstat -tunlp
+
+find / -name "*.sock"
+
+
+vim 就可以 :set number 显示行数  linux下文件的复制、移动与删除命令为：cp，mv，rm -rf
+
+./configure --prefix=/usr/local/nginx
+yum install pcre-devel
+ 
+/etc/init.d/php-fpm restart
+./usr/local/sbin/nginx 启动nginx  产生进程80端口 nginx.pid
+ /usr/local/php/sbin/php-fpm restart
+php-fpm 关闭：
+kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+php-fpm 重启：
+kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
+
+nginx + php-fpm
+
+listen       80;
+        server_name  myweb.wm987.com;
+        index index.html index.htm index.php;
+        root /onemary/www/myweb;
+        location ~ .*\.(php|php5)?$
+        {
+                #fastcgi_pass  unix:/tmp/php-cgi.sock;
+                fastcgi_pass  127.0.0.1:9000;
+                fastcgi_index index.php;
+                include fastcgi.conf;
+        }
+        location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+        {
+                expires 30d;
+        }
+        location ~ .*\.(js|css)?$
+        {
+                expires 1h;
+        }
+        #伪静态配置
+        include /onemary/server/nginx/conf/rewrite/myweb.conf;
+        access_log  /onemary/log/nginx/access/wedding016.log;
+
+service httpd restart  service mysqld stop  service mysqld start
+
+/usr/local/nginx/sbin/nginx -t
+/usr/local/nginx/sbin/nginx -s reload
+安装php-fpm http://www.androiddev.net/webserver-apache-to-nginx/
+/etc/init.d/php-fpm start   netstat -tunlp    
+
+去到PHP的源码目录，比如cd php-5.3.6/ext/gd，执行 phpize 即可。
+http://www.nowamagic.net/academy/detail/1226610
+
+./configure --with-png-dir --with-freetype-dir --with-jpeg-dir --with-gd --with-php-config=/usr/local/php/bin/php-config
+extension_dir = "/usr/local/php/lib/php/extensions/no-debug-non-zts-20060613/"
+extension = "memcache.so"
+extension = "pdo_mysql.so"
+#关闭php-fpm
+kill -INT `cat /usr/local/php/var/run/php-fpm.pid`
+
+#重启php-fpm
+kill -USR2 `cat /usr/local/php/var/run/php-fpm.pid`
+
+
+GD安装包http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=882601
+linux GD库安装 http://blog.chinaunix.net/uid-14802518-id-2784915.html
+
+./configure --prefix=/usr/local/jpeg --enable-shared
+
+ 重新编译安装php的make时候出现
+
+make: *** [sapi/cli/php] Error 1
+
+ 
+
+一：考虑过make clean，问题依然
+ 三：（推荐）
+
+另一种办法
+
+make ZEND_EXTRA_LIBS='-liconv'
+
+或者用另一种办法
+
+make ZEND_EXTRA_LIBS='-liconv'
+
+ln -s /usr/local/lib/libiconv.so.2 /usr/lib64/
+
+php安装
+http://www.cnblogs.com/zhja/p/3978870.html
+./configure --prefix=/usr/local/php --with-config-file-path=/etc --enable-inline-optimization --disable-debug --disable-rpath --enable-shared --enable-opcache --enable-fpm --with-fpm-user=www --with-fpm-group=www --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-gettext --enable-mbstring --with-iconv --with-mcrypt --with-mhash --with-openssl --enable-bcmath --enable-soap --with-libxml-dir --enable-pcntl --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-sockets --with-curl --with-zlib --enable-zip --with-bz2 --with-readline --without-sqlite3 --without-pdo-sqlite --with-pear 
+
+如果启动php-fpm出现错误: can not get uid for www，修改php-fpm.conf中user为nginx group为nginx
+
+Nginx是个轻量级的HTTP server，必须借助第三方的FastCGI处理器才可以对PHP进行解析
+
+标签max_children用于设置FastCGI的进程数。根据官方建议，小于2GB内存的服务器，可以只开启64个进程，4GB以上内存的服务器可以开启200个进程。
+<value name="max_children">5</value>
+
+标签rlimit_files用于设置PHP-FPM对打开文件描述符的限制，默认值为1024。这个标签的值必须和Linux内核打开文件数关联起来，例如要将此值设置为65535，就必须在Linux命令行执行'ulimit -HSn 65536'。
+<value name="rlimit_files">1024</value>
+/usr/local/php/sbin/php-fpm还有其他参数，具体为start|stop|quit|restart|reload|logrotate。
+ start，启动PHP的FastCGI进程。  
+ stop，强制终止PHP的FastCGI进程。  
+ quit，平滑终止PHP的FastCGI进程。  
+ restart， 重启PHP的FastCGI进程。  
+ reload， 重新加载PHP的php.ini。  
+ logrotate， 重新启用log文件。  
+
+cd gd-2.0.34
+  ./configure --with-png --with-freetype=/usr/local/freetype --with-jpeg=/usr/local/jpeg
+
+/usr/local/php/bin/phpize
+
+现在可以进行单独编译安装http://www.jb51.net/os/RedHat/144734.html
+
+检查是否支持安装
+/usr/local/include/freetype2/freetype
+freetype
+
+/usr/local/include/include
+t1lig
+
+/usr/local/include/libpng14/
+png
+
+/usr/local/include
+jpeg
+
+[root@xxx php-5.2.11]# ./configure --help | grep t1lib
+  --with-t1lib[=DIR]        GD: Include T1lib support. T1lib version >= 5.0.0 required
+[root@xxx php-5.2.11]# ./configure --help | grep png
+  --with-png-dir[=DIR]      GD: Set the path to libpng install prefix
+[root@xxx php-5.2.11]# ./configure --help | grep jpeg
+  --with-jpeg-dir[=DIR]     GD: Set the path to libjpeg install prefix
+[root@xxx php-5.2.11]# ./configure --help | grep freetype
+  --with-freetype-dir[=DIR] GD: Set the path to FreeType 2 install prefix
+[root@xxx php-5.2.11]#
+
+
+
+location ~ /(yuludaquan|xinqingriji|uploads|templets|shoujiduanxin|shige|shangganwenzhang|sanwenjingxuan|qqrizhi)/.*.(php|php5)?$ {
+            deny all;
+        }
+
+        location ~ /(qingganrizhi|mingrenmingyan|jingmeiwenzhang|juzidaquan|jingdianyuju|jingdianwenzhang|jingdianhuayu|jingdianduanwen)/.*.(php|php5)?$ {
+            deny all;
+        }
+
+        location ~ /(history|ask|404|301|images)/.*.(php|php5)?$ {
+            deny all;
+        }

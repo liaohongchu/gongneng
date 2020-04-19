@@ -1,0 +1,85 @@
+
+http://www.joyphper.net/article/201206/167.html
+
+
+一、下载源文件共两个：
+http://subversion.tigris.org/downloads/subversion-1.6.17.tar.gz
+http://subversion.tigris.org/downloads/subversion-deps-1.6.17.tar.gz
+在1.7以上的版本官方已经不再提供依赖包下载了。
+
+二、上传以上两个文件到服务器上，解压。解压命令为：
+
+tar xfvz subversion-1.6.17.tar.gz
+tar xfvz subversion-deps-1.6.17.tar.gz
+
+指令简介：tar 为解压命令，xfvz为tar命令的参数，用于解压tar.gz格式压缩的文件。
+
+三、解压后生成 subversion-1.6.17 子目录，两个压缩包解压后都会自动放到此目录下，不用手动更改。
+
+四、进入解压子目录：
+
+cd subversion-1.6.17
+
+五、 执行 ./configure --prefix=/opt/subversion 进行配置设定并指明安装目录. 注意prefix前是两个减号。
+
+在此过程中还需要确认系统里是否已经安装了gcc和openssl，详情可以参考
+
+http://www.joyphper.net/article/201206/gcc-rpm-install.html
+
+http://www.joyphper.net/article/201206/rpm-openssl-devel-install.html
+
+六、执行 make 编译.
+
+七、执行 make install 安装.
+
+八、 添加环境变量:
+
+vi /etc/profile
+
+在文件最后加入:
+
+SVNPATH=$PATH:/opt/subversion/bin
+
+export SVNPATH
+
+九、测试SVN是否安装成功,执行:
+
+svnserver --version
+
+如果显示版本信息, 则安装成功.
+
+--------------------
+Linux svn服务端配置
+http://seek-x.iteye.com/blog/755274
+http://www.centoscn.com/CentosServer/ftp/2014/0202/2409.html
+svn svn123
+---------------
+停止重启SVN
+
+[root@localhost password]# killall svnserve //停止
+[root@localhost password]# svnserve -d -r /opt/svn/repo // 启动
+
+================
+八、 添加环境变量:
+
+vi /etc/profile
+
+在文件最后加入:
+
+SVNPATH=$PATH:/usr/local/subversion/bin
+
+export SVNPATH
+
+svn服务是否启动
+
+netstat -antp |grep svn
+
+
+mkdir -p /home/svn/ 
+svnadmin create /home/svn/repo
+
+cd /home/svn/repo/conf
+
+/usr/local/subversion/bin/svnserve -version
+
+/usr/bin/yum install subversion 

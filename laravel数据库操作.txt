@@ -1,0 +1,37 @@
+https://www.jianshu.com/p/d79962751ebf
+$bool=DB::table("vipinfo")->insert(['vip_ID'=>6,'vip_name'=>'zls','vip_type'=>"出行",'vip_fenshu'=>800]);
+echo $bool;  //返回bool值
+ //如果想得到新增的id，则使用insertGetId方法
+  $id=DB::table("vipinfo")->insertGetId(['vip_ID'=>5,'vip_name'=>'wyp','vip_type'=>"出行",'vip_fenshu'=>800]);
+  echo $id;
+ //插入多条数据
+ $bool=DB::table("vipinfo")->insert([
+        ['vip_ID'=>5,'vip_name'=>'wyp','vip_type'=>"出行",'vip_fenshu'=>800],
+        ['vip_ID'=>6,'vip_name'=>'zls','vip_type'=>"出行",'vip_fenshu'=>800],
+]);
+echo $bool;  //返回bool值
+
+最简单的，laravel里get()得到的是一组数据，first()得到的是一个model数据。
+
+DB::table("vipinfo")->where('vip_ID',6)->update(['vip_fenshu'=>500]);
+
+DB::table("vipinfo")->where('vip_ID',6)->delete();//删除1条
+
+使用laravel 实现分页效果 超简单
+https://blog.csdn.net/cofecode/article/details/82839894
+// $articles = DB::table('articles')
+        //             ->select('id', 'body', 'title')
+        //             ->orderBy('id', 'desc')
+        //             ->paginate(5);   //分页的关键，这里是可以显示页码的分页，也可以用简单分页，只显示上一页，下一页。数据量大时，简单分页会更快
+laravel分页带参数实现
+https://blog.csdn.net/qq_40018938/article/details/80926708
+
+Laravel 默认登录认证功能代码重构示例
+https://laravelacademy.org/post/5417.html
+如果Auth::attempt认证用户后，然后在其它页面使用Auth::user()获取不到用户信息的话，很可能就是App\User没有配置正确。
+
+Laravel 登陆认证 访问指定的 Guard 实例 Admin认证
+https://blog.csdn.net/MShow006/article/details/81585234
+
+laravel : Auth登陆验证(简单实现)
+https://blog.csdn.net/weixin_38796220/article/details/80335392

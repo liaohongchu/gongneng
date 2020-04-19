@@ -1,1 +1,12 @@
-http://blog.fens.me/nodejs-express3/
+http://blog.fens.me/nodejs-express3/  看这个
+PowerShell如何以管理员身份运行一个命令？
+Start-Process powershell -Verb runAs
+以管理员身份打开PowerShell 输入 set-executionpolicy remotesigned（设置执行策略远程签名）
+
+nodejs写一个后台管理系统  
+https://www.cnblogs.com/qianqian1/articles/9797134.html
+1，全局安装 npm i express -g
+
+2,全局安装 npm i express-generator -g (用express脚手架)
+
+3，脚手架创建项目 express -e  project name(项目名称  列如 project  会生成一系列的目录结构)
